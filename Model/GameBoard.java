@@ -28,6 +28,10 @@ public abstract class GameBoard {
         this.board[yPos][xPos] = newToken;
     }
 
+    public Token getCell(int xPos, int yPos){
+        return this.board[yPos][xPos];
+    }
+
     public abstract String boardString();
 
     @Override
