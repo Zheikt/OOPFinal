@@ -9,5 +9,4 @@ public class Main {
         System.out.println(new BattleshipGameBoard());
         System.out.println(new CheckersBoard());
     }
-    hi bozos
 }
