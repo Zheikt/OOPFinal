@@ -15,15 +15,15 @@ public class BattleshipGameplay {
         Scanner scanner = new Scanner(System.in);
         int currentPlayer = 0; //For board coords, 0-9 char value 48 to 57, A-J char value 97 to 106 (lowercase)
         int[] targetPosition;
-        boolean loopKey = true;
-        while(loopKey) {
+        boolean gameOver = false;
+        while(!gameOver) {
             System.out.println( players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
             String target = scanner.nextLine();
             targetPosition = validateTarget(target, players[currentPlayer]);
             if (targetPosition[0] > -1) {
                 String hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
                 System.out.println("Your shot was a " + hitResult);
-                loopKey = false;
+                gameOver = true;
             }
         }
     }
