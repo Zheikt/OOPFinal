@@ -4,8 +4,11 @@ public class BattleshipGameBoard extends GameBoard{
 
     public BattleshipGameBoard(){
         super(10,10);
-        //getBoard()[2][9] = new Token("\u001B[38;5;196m");
-        //getBoard()[4][6] = new Token("\u001B[38;5;255m");
+        getBoard()[2][9] = new Token("\u001B[38;5;196m");
+        getBoard()[4][6] = new Token("\u001B[38;5;255m");
+        getBoard()[4][7] = new Token("\u001B[38;5;255m");
+        getBoard()[4][8] = new Token("\u001B[38;5;255m");
+        getBoard()[4][9] = new Token("\u001B[38;5;255m");
     }
 
     @Override
