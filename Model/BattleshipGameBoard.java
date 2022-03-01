@@ -13,9 +13,8 @@ public class BattleshipGameBoard extends GameBoard{
         StringBuilder builder = new StringBuilder();
 
         for (Token[] row: super.getBoard()) {
-            builder.append("\u001B[48;5;18m|");
             for (Token token : row) {
-                builder.append(token == null ? "\u2014" : (token.getColor() + "0\u001B[0m\u001B[48;5;18m")).append("|");
+                builder.append("\u001B[48;5;18m").append(token == null ? " ~ " : (token.getColor() + " 0 \u001B[0m"));
             }
             builder.append("\u001B[0m\n");
         }
