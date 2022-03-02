@@ -1,6 +1,8 @@
 package edu.neumont.oop.Controller;
 
+import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
+import edu.neumont.oop.Model.Token;
 
 import java.util.Scanner;
 
@@ -13,19 +15,26 @@ public class BattleshipGameplay {
 
     public void gamePlayLoop(){
         Scanner scanner = new Scanner(System.in);
-        int currentPlayer = 0; //For board coords, 0-9 char value 48 to 57, A-J char value 97 to 106 (lowercase)
+        int currentPlayer = -1; //For board coords, 0-9 char value 48 to 57, A-J char value 97 to 106 (lowercase)
         int[] targetPosition;
         boolean gameOver = false;
         while(!gameOver) {
-            System.out.println( players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
+            currentPlayer = (currentPlayer == -1 ? (int)(Math.random() * 2) : (currentPlayer + 1) % 2);
+            System.out.println(players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
             String target = scanner.nextLine();
             targetPosition = validateTarget(target, players[currentPlayer]);
             if (targetPosition[0] > -1) {
-                String hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
-                System.out.println("Your shot was a " + hitResult);
-                gameOver = true;
+                boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
+                System.out.println("Your shot was a " + (hitResult ? "Hit!" : "Miss."));
+                players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
+                gameOver = checkForGameOver(players[currentPlayer]);
             }
         }
+        endGame(currentPlayer);
+    }
+
+    private void endGame(int winningPlayer){
+
     }
 
     private int[] validateTarget(String targetStr, BattleshipPlayer currentPlayer){
@@ -56,7 +65,20 @@ public class BattleshipGameplay {
         return targetPosition;
     }
 
-    private String checkForHit(int[] target, BattleshipPlayer nonCurrentPlayer){
-        return nonCurrentPlayer.getShipBoard().getCell(target[0], target[1]) != null ? "Hit!" : "Miss.";
+    private boolean checkForHit(int[] target, BattleshipPlayer nonCurrentPlayer){
+        return nonCurrentPlayer.getShipBoard().getCell(target[0], target[1]) != null;
+    }
+
+    private boolean checkForGameOver(BattleshipPlayer currentPlayer){
+        int amountOfHits = 0;
+        Token[][] currentGuessBoard = currentPlayer.getGuessBoard().getBoard();
+        for (Token[] row : currentGuessBoard) {
+            for (Token piece : row) {
+                if (piece != null && piece.getColor().equals("\u001B[38;5;196m")) {
+                    amountOfHits++;
+                }
+            }
+        }
+        return amountOfHits == 17;
     }
 }

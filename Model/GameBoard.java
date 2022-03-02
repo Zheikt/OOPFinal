@@ -5,7 +5,7 @@ public abstract class GameBoard {
     private final int ROWS;
     private final int COLUMNS;
 
-    protected Token[][] getBoard(){
+    public Token[][] getBoard(){
         return board;
     }
 
