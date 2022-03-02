@@ -3,6 +3,7 @@ package edu.neumont.oop.Model;
 public class BattleshipPlayer extends Player{
     private BattleshipGameBoard shipBoard;
     private BattleshipGameBoard guessBoard;
+    //private Ship[] fleet; //Maybe use this to store their Ships?
 
     public BattleshipPlayer(String name) {
         super(name);
@@ -10,6 +11,7 @@ public class BattleshipPlayer extends Player{
         guessBoard = new BattleshipGameBoard();
     }
 
+    //Maybe this should be in the class that sets up the Battleship Game
     public void setShip(int xPos, int yPos, int xDir, int yDir, int size) throws IllegalArgumentException{ //Maybe this should be part of a Controller? Some error handling can be taken care of in a View when getting the info
         //Maybe change this to be recursive so that it checks each space as it goes to ensure it doesn't overlap with another ship
         if(xDir != 0 && yDir != 0){

@@ -15,10 +15,11 @@ public class BattleshipGameplay {
 
     public void gamePlayLoop(){
         Scanner scanner = new Scanner(System.in);
-        int currentPlayer = 0; //For board coords, 0-9 char value 48 to 57, A-J char value 97 to 106 (lowercase)
+        int currentPlayer = -1; //For board coords, 0-9 char value 48 to 57, A-J char value 97 to 106 (lowercase)
         int[] targetPosition;
         boolean gameOver = false;
         while(!gameOver) {
+            currentPlayer = (currentPlayer == -1 ? (int)(Math.random() * 2) : (currentPlayer + 1) % 2);
             System.out.println(players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
             String target = scanner.nextLine();
             targetPosition = validateTarget(target, players[currentPlayer]);
@@ -29,6 +30,11 @@ public class BattleshipGameplay {
                 gameOver = checkForGameOver(players[currentPlayer]);
             }
         }
+        endGame(currentPlayer);
+    }
+
+    private void endGame(int winningPlayer){
+
     }
 
     private int[] validateTarget(String targetStr, BattleshipPlayer currentPlayer){
