@@ -11,7 +11,7 @@ public class Main {
         //System.out.println(new BattleshipGameBoard());
         //System.out.println(new CheckersBoard());
     //Test Code for ship Placement
-        BattleshipPlayer testPlayer = new BattleshipPlayer("Tester");
+        BattleshipPlayer testPlayer = new BattleshipPlayer("Tester", true);
 
         testPlayer.setShip(0, 0, 0, 1, 5);
         testPlayer.setShip(1, 1, 0, 1, 4);
@@ -21,7 +21,7 @@ public class Main {
 
         System.out.println(testPlayer.getShipBoard());
 
-        BattleshipPlayer testPlayer2 = new BattleshipPlayer("Test Subject 2");
+        BattleshipPlayer testPlayer2 = new BattleshipPlayer("Test Subject 2", false);
 
         testPlayer2.setShip(8, 2, 0, 1, 5);
         testPlayer2.setShip(1, 1, 1, 0, 4);

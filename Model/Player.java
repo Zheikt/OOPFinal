@@ -2,18 +2,15 @@ package edu.neumont.oop.Model;
 
 public abstract class Player {
     private String name;
-    private Token token;
+    private boolean isHuman;
 
-    public Player(String name){
+    public Player(String name, boolean isHuman){
         this.name = name;
+        this.isHuman = isHuman;
     }
 
-    public Token getToken() {
-        return token;
-    }
-
-    public void setToken(Token token) {
-        this.token = token;
+    public boolean isHuman(){
+        return isHuman;
     }
 
     public String getName(){
