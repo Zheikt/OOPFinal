@@ -3,7 +3,7 @@ package edu.neumont.oop.Model;
 public class BattleshipPlayer extends Player{
     private BattleshipGameBoard shipBoard;
     private BattleshipGameBoard guessBoard;
-    //private Ship[] fleet; //Maybe use this to store their Ships?
+    private Ship[] fleet; //Maybe use this to store their Ships?
 
     public BattleshipPlayer(String name) {
         super(name);
