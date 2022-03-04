@@ -15,7 +15,7 @@ public class BattleshipMenu {
     public void BSMenu1(){
         Scanner scanner = new Scanner(System.in);
 
-        StringArray ships = new StringArray();
+        String[] ships = new String[5];
 
 
 
@@ -34,7 +34,7 @@ public class BattleshipMenu {
             String responseString = scanner.nextLine().toLowerCase().trim();
             String pt1 = responseString.substring(0,2).toLowerCase();
             String pt2 = responseString.substring(4).toLowerCase();
-            ships.add(pt1 + pt2);
+
 
 
 
