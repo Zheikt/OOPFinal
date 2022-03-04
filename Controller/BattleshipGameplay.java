@@ -50,12 +50,12 @@ public class BattleshipGameplay {
         Random generator = new Random();
         int[] targetPosition = {-1, -1};
         while(targetPosition[0] == -1){
-            String targetStr = "" + (char)(generator.nextInt(10) + 96) + (generator.nextInt(10) + 1);
+            String targetStr = "" + (char)(generator.nextInt(10) + 97) + (generator.nextInt(10) + 1);
             targetPosition = validateTarget(targetStr, players[currentPlayer]);
         }
         boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
         players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
-        System.out.println(players[currentPlayer].getName() + "'s shot was a " + (hitResult ? "Hit!" : "Miss.") + "Its board:\n" + players[currentPlayer].getGuessBoard());
+        System.out.println(players[currentPlayer].getName() + "'s shot was a " + (hitResult ? "Hit!" : "Miss.") + " Its board:\n" + players[currentPlayer].getGuessBoard());
     }
 
     private int[] validateTarget(String targetStr, BattleshipPlayer currentPlayer){
