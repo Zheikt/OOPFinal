@@ -13,7 +13,7 @@ public class BattleshipGameBoard extends GameBoard{
         for (int row = 0; row < super.getBoard().length; row++) {
             builder.append((char)(row + 65)).append(" "); //Appends capital letter A through J based on their char value (65 to 74)
             for (Token token : super.getBoard()[row]) {
-                builder.append("\u001B[48;5;18m").append(token == null ? "\u001B[38;5;27m ~ " : (token.getColor() + " 0 \u001B[0m"));
+                builder.append("\u001B[48;5;18m").append(token == null ? "\u001B[38;5;27m ~ " : (" " + token + " \u001B[0m"));
             }
             builder.append("\u001B[0m\n");
         }
