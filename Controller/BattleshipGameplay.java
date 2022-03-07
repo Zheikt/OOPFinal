@@ -4,6 +4,7 @@ import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
 import edu.neumont.oop.Model.Token;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class BattleshipGameplay {
@@ -14,27 +15,47 @@ public class BattleshipGameplay {
     }
 
     public void gamePlayLoop(){
-        Scanner scanner = new Scanner(System.in);
         int currentPlayer = -1; //For board coords, 0-9 char value 48 to 57, A-J char value 97 to 106 (lowercase)
-        int[] targetPosition;
         boolean gameOver = false;
         while(!gameOver) {
             currentPlayer = (currentPlayer == -1 ? (int)(Math.random() * 2) : (currentPlayer + 1) % 2);
-            System.out.println(players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
-            String target = scanner.nextLine();
-            targetPosition = validateTarget(target, players[currentPlayer]);
-            if (targetPosition[0] > -1) {
-                boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
-                System.out.println("Your shot was a " + (hitResult ? "Hit!" : "Miss."));
-                players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
-                gameOver = checkForGameOver(players[currentPlayer]);
+            if(players[currentPlayer].isHuman()){
+                humanTurn(currentPlayer);
+            } else {
+                computerTurn(currentPlayer);
             }
+            gameOver = checkForGameOver(players[currentPlayer]);
         }
         endGame(currentPlayer);
     }
 
     private void endGame(int winningPlayer){
         //most likely, do the PlayerIO stat updates here.
+    }
+
+    private void humanTurn(int currentPlayer){
+        int[] targetPosition = {-1, -1};
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
+        while(targetPosition[0] == -1) {
+            String target = scanner.nextLine();
+            targetPosition = validateTarget(target, players[currentPlayer]);
+        }
+        boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
+        System.out.println("Your shot was a " + (hitResult ? "Hit!" : "Miss."));
+        players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
+    }
+
+    private void computerTurn(int currentPlayer){
+        Random generator = new Random();
+        int[] targetPosition = {-1, -1};
+        while(targetPosition[0] == -1){
+            String targetStr = "" + (char)(generator.nextInt(10) + 97) + (generator.nextInt(10) + 1);
+            targetPosition = validateTarget(targetStr, players[currentPlayer]);
+        }
+        boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
+        players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
+        System.out.println(players[currentPlayer].getName() + "'s shot was a " + (hitResult ? "Hit!" : "Miss.") + " Its board:\n" + players[currentPlayer].getGuessBoard());
     }
 
     private int[] validateTarget(String targetStr, BattleshipPlayer currentPlayer){
