@@ -22,7 +22,8 @@ public class BattleshipGameplay {
             result.delete(0, result.toString().length());
             currentPlayer = (currentPlayer == -1 ? (int)(Math.random() * 2) : (currentPlayer + 1) % 2);
             result.append(players[currentPlayer].isHuman() ? humanTurn(currentPlayer) : computerTurn(currentPlayer));
-            checkForSunkShip(currentPlayer);
+            String sunkMessage = checkForSunkShip(currentPlayer);
+            result.append(sunkMessage.isEmpty() ? "" : " " + sunkMessage + ".");
             result.append(players[currentPlayer].isHuman() ? "" : " Its board:\n" + players[currentPlayer].getGuessBoard());
             gameOver = checkForGameOver(players[currentPlayer]);
 
@@ -93,29 +94,28 @@ public class BattleshipGameplay {
         return nonCurrentPlayer.getShipBoard().getCell(target[0], target[1]) != null;
     }
 
-    private void checkForSunkShip(int currentPlayer){
+    private String checkForSunkShip(int currentPlayer){
         int otherPlayer = (currentPlayer + 1) % 2;
+        String message = "";
         for(int index = 0; index < players[otherPlayer].getFleet().length; index++) {
             Token[] markers = new Token[players[otherPlayer].getFleet()[index].getSize()];
             int hitAmount = 0;
             int placeInArray = 0;
             for (int[] locations : players[otherPlayer].getFleet()[index].getBoardLocations()) {
                 markers[placeInArray] = players[currentPlayer].getGuessBoard().getCell(locations[0], locations[1]);
-                if(markers[placeInArray] != null && markers[placeInArray].getColor().equals("\u001B[38;5;196m")){
+                if(markers[placeInArray] != null && markers[placeInArray].toString().equals("\u001B[38;5;196m0")){
                     hitAmount++;
                 }
                 placeInArray++;
             }
             if(hitAmount == players[otherPlayer].getFleet()[index].getSize()){
                 for (Token marker : markers) {
-                    try {
-                        marker.setSymbol("X");
-                    } catch (NullPointerException npe) {
-                        System.out.println("wut");
-                    }
+                    marker.setSymbol("X");
                 }
+                message = players[currentPlayer].getName() + " sunk " + players[otherPlayer].getName() + "'s " + players[otherPlayer].getFleet()[index].getType();
             }
         }
+        return message;
     }
 
     private boolean checkForGameOver(BattleshipPlayer currentPlayer){
