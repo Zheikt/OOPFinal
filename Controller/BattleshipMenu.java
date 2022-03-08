@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class BattleshipMenu {
     private int shipCounter = 5;
 
-    BattleshipPlayer bsp = new BattleshipPlayer(null);
+    BattleshipPlayer bsp = new BattleshipPlayer(null, false);
 
     public void BSMenu1(){
         Scanner scanner = new Scanner(System.in);
