@@ -14,7 +14,7 @@ public class BattleshipGameBoard extends GameBoard{
 
         for (Token[] row: super.getBoard()) {
             for (Token token : row) {
-                builder.append("\u001B[48;5;18m").append(token.getTokenColor().isEmpty() ? " ~ " : (token.getBackgroundColor() + " 0 \u001B[0m"));
+                builder.append("\u001B[48;5;18m").append(token.getColor().isEmpty() ? " ~ " : (token.getColor() + " 0 \u001B[0m"));
             }
             builder.append("\u001B[0m\n");
         }

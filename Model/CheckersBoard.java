@@ -1,36 +1,79 @@
 package edu.neumont.oop.Model;
 
-public class CheckersBoard extends GameBoard{
+public class CheckersBoard {
 
-    public CheckersBoard(){
-        super(8,8);
+    public CheckersPiece[][] boardArray;
+    public int size;
+
+
+    public CheckersBoard(int size) {
+        this.boardArray = new CheckersPiece[size][size];
+        this.size = size;
+
+        setupBoard();
     }
 
-    public void initializeCheckersBoard()
-    {
-        for (int row = 0; row < super.getBoard().length; row++) {
-            for (int token = 0; token < super.getBoard()[row].length; token++) {
-                if (row % 2 == 0){
-                    super.getBoard()[row][token].setBackgroundColor(token % 2 == 1 ? ((row < 3) ? "\033[40m 0 \033[0m" : ((row == 6) ? "\033[40m \033[1;31m0\033[0m\033[40m \033[0m" : "\033[40m   \033[0m")) : "\033[41m   \033[0m");
-                }
-                if (row % 2 == 1)
-                {
-                    super.getBoard()[row][token].setBackgroundColor(token % 2 == 0 ? ((row > 4) ? "\033[40m \033[1;31m0\033[0m\033[40m \033[0m" : ((row == 1) ? "\033[40m 0 \033[0m" : "\033[40m   \033[0m")) : "\033[41m   \033[0m");
+    public void setupBoard() {
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                if (y < 3 && isCheckerboardSpace(x, y)) {
+                    this.boardArray[y][x] = new CheckersPiece(x, y, true);
+                } else if (y >= size - 3 && isCheckerboardSpace(x, y)) {
+                    this.boardArray[y][x] = new CheckersPiece(x, y, false);
                 }
             }
         }
     }
 
-    @Override
-    public String boardString() {
-        String board = "";
-        for (int row = 0; row < super.getBoard().length; row++) {
-            for (int token = 0; token < super.getBoard()[row].length; token++) {
-                board += super.getBoard()[row][token].getBackgroundColor();
-               }
-            board += "\n";
+    public void applyMoveToBoard(Move move, CheckersPiece piece) {
+        int[] moveStartingPos = piece.getCoordinates();
+        int[] moveEndingPos = move.getEndingPosition();
+
+        CheckersPiece[] jumpedPieces = move.getJumpedPieces(this);
+        if (jumpedPieces != null) {
+            for (CheckersPiece jumpedPiece : jumpedPieces) {
+                if (jumpedPiece != null) {
+                    this.setValueAt(jumpedPiece.getCoordinates()[0], jumpedPiece.getCoordinates()[1], null);
+                }
+            }
         }
-        return board;
+
+        this.setValueAt(moveStartingPos[0], moveStartingPos[1], null);
+        piece.moveTo(moveEndingPos[0], moveEndingPos[1]);
+
+        piece.checkIfShouldBeKing(this);
+
+        this.setValueAt(moveEndingPos[0], moveEndingPos[1], piece);
+    }
+
+    private void setValueAt(int x, int y, CheckersPiece piece) {
+        this.boardArray[y][x] = piece;
+    }
+
+    public CheckersPiece getValueAt(int x, int y) {
+        return this.boardArray[y][x];
+    }
+
+    public CheckersPiece getValueAt(int position) {
+        int[] coords = getCoordinatesFromPosition(position);
+        return this.getValueAt(coords[0], coords[1]);
+    }
+
+    public int[] getCoordinatesFromPosition(int position) {
+        int[] coords = new int[2];
+
+        coords[0] = position % this.size;
+        coords[1] = position / this.size;
+        return coords;
+    }
+
+    public boolean isCheckerboardSpace(int x, int y) {
+        return x % 2 == y % 2;
+    }
+
+    public boolean isOverEdge(int x, int y) {
+        return (x < 0 || x >= this.size ||
+                y < 0 || y >= this.size);
     }
 
 }
