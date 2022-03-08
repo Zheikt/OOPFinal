@@ -1,16 +1,28 @@
 package edu.neumont.oop.Controller;
 
 import com.sun.xml.internal.fastinfoset.util.StringArray;
+import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
 
 import java.lang.reflect.Array;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class BattleshipMenu {
+public class BattleshipMenu  {
     private int shipCounter = 5;
+    BattleshipGameBoard bsgb = new BattleshipGameBoard();
 
-    BattleshipPlayer bsp = new BattleshipPlayer(null);
+
+
+    BattleshipPlayer bsp = new BattleshipPlayer("");
+
+    public void BSIntroMenu(){
+        System.out.println("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
+        System.out.println("///// \n" +
+                "///// \n" +
+                "///// ");
+        BSMenu1();
+    }
 
     public void BSMenu1(){
         Scanner scanner = new Scanner(System.in);
@@ -29,6 +41,7 @@ public class BattleshipMenu {
                     "Submarine - 3 spots \n" +
                     "Destroyer - 2 spots");
             shipCounter--;
+            //we could possibly show an empty board here
             System.out.println("Where would you like to place your ship on the board, including direction \n" +
                     "Ex. A5, Left");
             String responseString = scanner.nextLine().toLowerCase().trim();
