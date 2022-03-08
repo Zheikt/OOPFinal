@@ -13,23 +13,23 @@ public class Main {
         //System.out.println(new BattleshipGameBoard());
         //System.out.println(new CheckersBoard());
     //Test Code for ship Placement
-        BattleshipPlayer testPlayer = new BattleshipPlayer("Tester", Math.random() > 0.5);
+        BattleshipPlayer testPlayer = new BattleshipPlayer("Tester", false);
 
-        testPlayer.setShip(0, 0, 0, 1, 5);
-        testPlayer.setShip(1, 1, 0, 1, 4);
-        testPlayer.setShip(2, 2, 0, 1, 3);
-        testPlayer.setShip(3, 3, 0, 1, 3);
-        testPlayer.setShip(4, 4, 0, 1, 2);
+        testPlayer.setShip(0, 0, 0, 1, 5, "Carrier");
+        testPlayer.setShip(1, 1, 0, 1, 4,"Battleship");
+        testPlayer.setShip(2, 2, 0, 1, 3, "Cruiser");
+        testPlayer.setShip(3, 3, 0, 1, 3, "Submarine");
+        testPlayer.setShip(4, 4, 0, 1, 2, "Destroyer");
 
         System.out.println(testPlayer.getShipBoard());
 
-        BattleshipPlayer testPlayer2 = new BattleshipPlayer("Test Subject 2", Math.random() > 0.5);
+        BattleshipPlayer testPlayer2 = new BattleshipPlayer("Test Subject 2", false);
 
-        testPlayer2.setShip(8, 2, 0, 1, 5);
-        testPlayer2.setShip(1, 1, 1, 0, 4);
-        testPlayer2.setShip(2, 2, 0, 1, 3);
-        testPlayer2.setShip(9, 9, 0, -1, 3);
-        testPlayer2.setShip(4, 4, -1, 0, 2);
+        testPlayer2.setShip(8, 2, 0, 1, 5, "Carrier");
+        testPlayer2.setShip(1, 1, 1, 0, 4, "Battleship");
+        testPlayer2.setShip(2, 2, 0, 1, 3, "Cruiser");
+        testPlayer2.setShip(9, 9, 0, -1, 3, "Submarine");
+        testPlayer2.setShip(4, 4, -1, 0, 2, "Destroyer");
 
         System.out.println(testPlayer2.getShipBoard());
 
