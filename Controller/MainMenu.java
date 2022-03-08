@@ -3,8 +3,9 @@ package edu.neumont.oop.Controller;
 import java.util.Scanner;
 
 public class MainMenu {
-    BattleshipMenu baShipMenu = new BattleshipMenu();
+
     Scanner scanner = new Scanner(System.in);
+    BattleshipMenu bsMenu = new BattleshipMenu();
 
     public void introduction(){
         System.out.println("Welcome to the -VERY LARGE- Game collection! \n" +
@@ -16,6 +17,8 @@ public class MainMenu {
     public void menu1(){
         System.out.println("First things first. Can I get your name?");
         String PlayerName = scanner.nextLine();
+        System.out.println("Thank you.");
+        System.out.println("////////////////////////////////////////////////////////////");
         System.out.println("Next thing on the Agenda. How would you like to play today? We have a couple options for ya: \n" +
                 "1. Player Vs Player \n" +
                 "2. Player Vs AI \n" +
@@ -48,14 +51,15 @@ public class MainMenu {
     }
 
     public void menu2(){
-
-
-        System.out.println("So, what would you like to choose? You can say 'Battleship' or 1 for Battleship, and 'Checkers' or 2 for Checkers");
+        System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////////// \n" +
+                "WELCOME TO THE GAME SELECTION MENU!!! \n" +
+                "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+        System.out.println("So, what would you like to choose? You can say 'Battleship' or 1 for Battleship and 'Checkers' or 2 for Checkers");
         System.out.println("Please note, if you leave this space blank or put in anything else, we as the system will yell at you.");
         System.out.println("You can also say exit, but that would exit the code without playing any games :(");
         String response = scanner.nextLine();
         if(response.equalsIgnoreCase("Battleship") || response.equalsIgnoreCase("1")) {
-            baShipMenu.BSMenu1();
+            bsMenu.BSIntroMenu();
         }
         else if(response.equalsIgnoreCase("Checkers") || response.equalsIgnoreCase("2")){
                 //checkers menu goes here
