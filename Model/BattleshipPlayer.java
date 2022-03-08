@@ -9,10 +9,11 @@ public class BattleshipPlayer extends Player{
         super(name, isHuman);
         shipBoard = new BattleshipGameBoard();
         guessBoard = new BattleshipGameBoard();
+        fleet = new Ship[5];
     }
 
     //Maybe this should be in the class that sets up the Battleship Game
-    public void setShip(int xPos, int yPos, int xDir, int yDir, int size) throws IllegalArgumentException{ //Maybe this should be part of a Controller? Some error handling can be taken care of in a View when getting the info
+    public void setShip(int xPos, int yPos, int xDir, int yDir, int size, String name) throws IllegalArgumentException{ //Maybe this should be part of a Controller? Some error handling can be taken care of in a View when getting the info
         //Maybe change this to be recursive so that it checks each space as it goes to ensure it doesn't overlap with another ship
         if(xDir != 0 && yDir != 0){
             throw new IllegalArgumentException("Ship cannot be placed diagonally. X-Direction or Y-Direction must be 0. X-Dir: " + xDir + " Y-Dir: " + yDir);
@@ -34,11 +35,17 @@ public class BattleshipPlayer extends Player{
             throw new IllegalArgumentException("Illegal y-position for given direction. Ship doesn't have space to be placed");
         }
 
-        for(int count = size; count > 0; count--){
+        int[][] locations = new int[size][2];
+
+        for(int count = 0; count < size; count++){
             shipBoard.setCell(xPos, yPos, new Token("\u001B[38;5;240m"));
+            locations[count][0] = xPos;
+            locations[count][1] = yPos;
             xPos += xDir;
             yPos += yDir;
         }
+        int loc = (name.length() == 10 ? 1 : (name.length() == 9 ? (name.contains("u") ? 3 : 4) : name.contains("a") ? 0 : 2));
+        fleet[loc] = new Ship(name, size, locations);
     }
 
     public BattleshipGameBoard getShipBoard(){
@@ -47,6 +54,10 @@ public class BattleshipPlayer extends Player{
 
     public BattleshipGameBoard getGuessBoard(){
         return guessBoard;
+    }
+
+    public Ship[] getFleet(){
+        return fleet;
     }
 
 }

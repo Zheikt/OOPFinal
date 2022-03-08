@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         //System.out.println(new BattleshipGameBoard());
         //System.out.println(new CheckersBoard());
+<<<<<<< HEAD
         //Test Code for ship Placement
         MainMenu mMenu = new MainMenu();
         mMenu.introduction();
