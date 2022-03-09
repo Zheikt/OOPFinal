@@ -24,6 +24,7 @@ public class BattleshipMenu{
     public BattleshipMenu(String player1Name, String player2Name, boolean player1IsHuman, boolean player2IsHuman){
         player = new BattleshipPlayer(player1Name, player1IsHuman);
         player2 = new BattleshipPlayer(player2Name, player2IsHuman);
+        BSIntroMenu();
     }
 
     public void BSIntroMenu(){

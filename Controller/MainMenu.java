@@ -6,8 +6,11 @@ import java.util.Scanner;
 
 public class MainMenu{
     private ConsoleIO message = new ConsoleIO();
+    CheckersMenu cMenu = new CheckersMenu();
     private String Player1Name;
     private String Player2Name;
+    private boolean HumanOrAIP1;
+    private boolean HumanOrAIP2;
 
 
     public void setPlayer1Name(String player1Name) {
@@ -42,17 +45,23 @@ public class MainMenu{
         int response = Integer.parseInt(scanner.nextLine());
         switch (response){
             case 1:
+                HumanOrAIP1 = true;
+                HumanOrAIP2 = true;
                 message.printMessage("What is gonna be the name of player 2?");
                 String name2 = scanner.nextLine();
                 setPlayer2Name(name2);
                 message.printMessage("Directing you to the game selection menu now...");
                 menu2();
             case 2:
+                HumanOrAIP1 = true;
+                HumanOrAIP2 = false;
                 message.printMessage("What do you want to call your computer opponent?");
                 String AIName = scanner.nextLine();
                 message.printMessage("Directing you to the game selection menu now...");
                 menu2();
             case 3:
+                HumanOrAIP1 = false;
+                HumanOrAIP2 = false;
                 message.printMessage("Since you will be spectating the coming game, what do you want to call the first AI?");
                 String AI1Name = scanner.nextLine();
                 message.printMessage("What will you call " + AI1Name + "'s opponent?");
@@ -75,10 +84,10 @@ public class MainMenu{
         message.printMessage("You can also say exit, but that would exit the code without playing any games :( \n");
         String response = scanner.nextLine();
         if(response.equalsIgnoreCase("Battleship") || response.equalsIgnoreCase("1")) {
-            new BattleshipMenu(Player1Name, Player2Name, true, true);
+            new BattleshipMenu(Player1Name, Player2Name, HumanOrAIP1, HumanOrAIP2);
         }
         else if(response.equalsIgnoreCase("Checkers") || response.equalsIgnoreCase("2")){
-                //checkers menu goes here
+            cMenu.createBoard();
         } else if(response.equalsIgnoreCase("")){
             message.printMessage("We told you not to leave that blank!");
             menu2();

@@ -5,7 +5,7 @@ import edu.neumont.oop.View.ConsoleIO;
 
 import java.util.Scanner;
 
-public class CheckersMenu extends MainMenu{
+public class CheckersMenu {
 
 
         public static final int SIZE = 8;
@@ -23,7 +23,7 @@ public class CheckersMenu extends MainMenu{
             Player player1;
             Player player2;
 
-            if (isAskIfPlayer2()) {
+            if (askIfTwoPlayer()) {
                 player1 = new HPlayer(true);
                 player2 = new HPlayer(false);
             } else {
@@ -43,13 +43,6 @@ public class CheckersMenu extends MainMenu{
             }
         }
 
-    public static boolean isAskIfPlayer2() {
-        return askIfPlayer2;
-    }
-
-    public static void setAskIfPlayer2(boolean askIfPlayer2) {
-        CheckersMenu.askIfPlayer2 = askIfPlayer2;
-    }
 
     static boolean askIfTwoPlayer() {
             while (true) {

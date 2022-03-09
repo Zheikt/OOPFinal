@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-	CheckersMenu checkerStart = new CheckersMenu();
+	//CheckersMenu checkerStart = new CheckersMenu();
         //checkerStart.createBoard();
         //System.out.println(new BattleshipGameBoard());
         //System.out.println();
