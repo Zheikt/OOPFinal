@@ -6,21 +6,14 @@ import java.util.Scanner;
 
 public class MainMenu{
     private ConsoleIO message = new ConsoleIO();
-    BattleshipMenu bsMenu = new BattleshipMenu();
     private String Player1Name;
     private String Player2Name;
 
-    public String getPlayer1Name() {
-        return Player1Name;
-    }
 
     public void setPlayer1Name(String player1Name) {
         Player1Name = player1Name;
     }
 
-    public String getPlayer2Name() {
-        return Player2Name;
-    }
 
     public void setPlayer2Name(String player2Name) {
         Player2Name = player2Name;
@@ -82,7 +75,7 @@ public class MainMenu{
         message.printMessage("You can also say exit, but that would exit the code without playing any games :( \n");
         String response = scanner.nextLine();
         if(response.equalsIgnoreCase("Battleship") || response.equalsIgnoreCase("1")) {
-            bsMenu.BSIntroMenu();
+            new BattleshipMenu(Player1Name, Player2Name, true, true);
         }
         else if(response.equalsIgnoreCase("Checkers") || response.equalsIgnoreCase("2")){
                 //checkers menu goes here
