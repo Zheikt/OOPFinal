@@ -1,7 +1,6 @@
 package edu.neumont.oop.Model;
 
 import edu.neumont.oop.Controller.CheckersMenu;
-
 import java.util.Scanner;
 
     public class HPlayer extends Player {
@@ -25,7 +24,7 @@ import java.util.Scanner;
                 possibleMoves = pieceMoving.getAllPossibleMoves(board);
 
                 if (possibleMoves == null)
-                    System.out.println("That piece has no possible moves! Please choose a different piece:");
+                    System.out.println("That piece has no possible moves! Choose a different piece");
                 else {
                     displayBoard(board, possibleMoves);
                     Move move = getMoveFromUser(possibleMoves);
@@ -110,13 +109,13 @@ import java.util.Scanner;
                     CheckersPiece userPiece = board.getValueAt(x, y);
 
                     if (userPiece == null)
-                        System.out.println("There is no piece there!\n");
+                        System.out.println("There's no piece there!\n");
                     else if (userPiece.isRed != this.isRed)
                         System.out.println("That's not your piece!\n");
                     else
                         return userPiece;
                 } catch (Exception e) {
-                    System.out.println("Please enter a coordinate on the board in the form '[letter][number]'.");
+                    System.out.println("Please enter a coordinate on the board in the form 'Letter,Number'.");
                 }
             }
         }
@@ -125,7 +124,7 @@ import java.util.Scanner;
             int moveNum;
 
             while (true) {
-                System.out.println(getColor() + ", please select a move the its number (enter 0 to go back):");
+                System.out.println(getColor() + ", please select a move by its number (enter 0 to go back):");
                 try {
                     moveNum = input.nextInt();
                     input.nextLine();

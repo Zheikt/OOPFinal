@@ -1,13 +1,11 @@
 package edu.neumont.oop.Controller;
 
 import edu.neumont.oop.Model.*;
-
 import java.util.Scanner;
 
 public class CheckersMenu {
 
-
-        public static final int SIZE = 9;
+        public static final int SIZE = 8;
 
         private static Scanner input = new Scanner(System.in);
         static boolean isPlayer1 = true;
@@ -45,9 +43,9 @@ public class CheckersMenu {
                 clearScreen();
                 System.out.println("Welcome to checkers!\n");
                 System.out.println("Choose your mode!");
-                System.out.println("[1] Player VS Computer");
-                System.out.println("[2] Player VS Player");
-                System.out.println("\nWhich one would you like to play? Enter a number: ");
+                System.out.println("1: Player VS Computer");
+                System.out.println("2: Player VS Player");
+                System.out.println("\nWhich one would you like to play? Enter a number or choose to exit: ");
 
                 String response = input.nextLine();
                 switch (response.trim()) {
@@ -87,7 +85,6 @@ public class CheckersMenu {
                     System.out.println("Congratulations, Red, you won!");
                 else
                     return false;
-
             }
             return true;
         }
