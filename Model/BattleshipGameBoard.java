@@ -4,20 +4,16 @@ public class BattleshipGameBoard extends GameBoard{
 
     public BattleshipGameBoard(){
         super(10,10);
-        getBoard()[2][9] = new Token("\u001B[38;5;196m");
-        getBoard()[4][6] = new Token("\u001B[38;5;255m");
-        getBoard()[4][7] = new Token("\u001B[38;5;255m");
-        getBoard()[4][8] = new Token("\u001B[38;5;255m");
-        getBoard()[4][9] = new Token("\u001B[38;5;255m");
     }
 
     @Override
     public String boardString() {
-        StringBuilder builder = new StringBuilder();
+	StringBuilder builder = new StringBuilder("   1  2  3  4  5  6  7  8  9  10\n");
 
-        for (Token[] row: super.getBoard()) {
-            for (Token token : row) {
-                builder.append("\u001B[48;5;18m").append(token.getColor().isEmpty() ? " ~ " : (token.getColor() + " 0 \u001B[0m"));
+        for (int row = 0; row < super.getBoard().length; row++) {
+            builder.append((char)(row + 65)).append(" "); //Appends capital letter A through J based on their char value (65 to 74)
+            for (Token token : super.getBoard()[row]) {
+                builder.append("\u001B[48;5;18m").append(token == null ? "\u001B[38;5;27m ~ " : (" " + token + " \u001B[0m"));
             }
             builder.append("\u001B[0m\n");
         }

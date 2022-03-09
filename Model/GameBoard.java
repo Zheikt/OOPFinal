@@ -5,7 +5,7 @@ public abstract class GameBoard {
     private final int ROWS;
     private final int COLUMNS;
 
-    protected Token[][] getBoard(){
+    public Token[][] getBoard(){
         return board;
     }
 
@@ -26,6 +26,10 @@ public abstract class GameBoard {
 
     public void setCell(int xPos, int yPos, Token newToken){
         this.board[yPos][xPos] = newToken;
+    }
+
+    public Token getCell(int xPos, int yPos){
+        return this.board[yPos][xPos];
     }
 
     public abstract String boardString();
