@@ -13,6 +13,7 @@ public class CheckersMenu {
 
         private static Scanner input = new Scanner(System.in);
         static boolean isPlayer1 = true;
+        private static boolean askIfPlayer2;
 
         private static boolean endGameNow = false;
 
@@ -22,7 +23,7 @@ public class CheckersMenu {
             Player player1;
             Player player2;
 
-            if (CheckersMenu.askIfTwoPlayer()) {
+            if (isAskIfPlayer2()) {
                 player1 = new HPlayer(true);
                 player2 = new HPlayer(false);
             } else {
@@ -42,7 +43,15 @@ public class CheckersMenu {
             }
         }
 
-        static boolean askIfTwoPlayer() {
+    public static boolean isAskIfPlayer2() {
+        return askIfPlayer2;
+    }
+
+    public static void setAskIfPlayer2(boolean askIfPlayer2) {
+        CheckersMenu.askIfPlayer2 = askIfPlayer2;
+    }
+
+    static boolean askIfTwoPlayer() {
             while (true) {
                 clearScreen();
                 message.printMessage("Welcome to checkers!\n");

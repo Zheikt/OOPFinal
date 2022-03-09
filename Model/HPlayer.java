@@ -11,6 +11,7 @@ import java.util.Scanner;
         private boolean isRed;
 
         public HPlayer(boolean isRed) {
+            super("",true);
             this.isRed = isRed;
         }
 

@@ -82,7 +82,7 @@ public class MainMenu{
         message.printMessage("You can also say exit, but that would exit the code without playing any games :(");
         String response = scanner.nextLine();
         if(response.equalsIgnoreCase("Battleship") || response.equalsIgnoreCase("1")) {
-            BattleshipMenu.BSIntroMenu();
+            bsMenu.BSIntroMenu();
         }
         else if(response.equalsIgnoreCase("Checkers") || response.equalsIgnoreCase("2")){
                 //checkers menu goes here

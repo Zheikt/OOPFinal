@@ -9,22 +9,22 @@ import java.util.Scanner;
 public class BattleshipMenu{
     private static ConsoleIO message = new ConsoleIO();
 
-    private static int shipCounter = 5;
-    private static int shipCounter2 = 5;
+    private int shipCounter = 5;
+    private int shipCounter2 = 5;
     static MainMenu main = new MainMenu();
 
     BattleshipGameBoard bsgb = new BattleshipGameBoard();
-    static int xPos;
-    static int yPos;
-    static int xDir;
-    static int yDir;
-    static int size;
+    private int xPos;
+    private int yPos;
+    private int xDir;
+    private int yDir;
+    private int size;
     static BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
     static BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
 
     BattleshipPlayer bsp = new BattleshipPlayer(null, false);
 
-    public static void BSIntroMenu(){
+    public void BSIntroMenu(){
         message.printMessage("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
         message.printMessage("///// \n" +
                 "///// \n" +
@@ -33,12 +33,8 @@ public class BattleshipMenu{
     }
 
 
-    public static void BSMenuPlayer1() {
+    public void BSMenuPlayer1() {
         Scanner scanner = new Scanner(System.in);
-
-        String[] ships = new String[5];
-
-
 
         //We would have to tweak this to run twice, once for each player.
         for (int i = 5; i > 0; i--) {
@@ -131,7 +127,7 @@ public class BattleshipMenu{
             BSMenuPlayer2();
         }
     }
-        public static void BSMenuPlayer2(){
+        public void BSMenuPlayer2(){
             Scanner scanner = new Scanner(System.in);
 
             //We would have to tweak this to run twice, once for each player.

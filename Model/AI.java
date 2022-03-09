@@ -11,6 +11,7 @@ public class AI extends Player {
         boolean isRed;
 
         public AI(boolean isRed) {
+            super("",true);
             this.isRed = isRed;
         }
 
