@@ -5,6 +5,11 @@ public class BattleshipPlayer extends Player{
     private BattleshipGameBoard guessBoard;
     private Ship[] fleet; //Maybe use this to store their Ships?
 
+    @Override
+    public CheckersBoard getMove(CheckersBoard board) {
+        return null; //This needs to get changed
+    }
+
     public BattleshipPlayer(String name, boolean isHuman) {
         super(name, isHuman);
         shipBoard = new BattleshipGameBoard();

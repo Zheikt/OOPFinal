@@ -1,26 +1,8 @@
 package edu.neumont.oop.Controller;
 
-<<<<<<< HEAD
-import java.util.Scanner;
-
-public class BattleshipMenu {
-<<<<<<< HEAD
-
-    public void BSmenu1(){
-        //System.out.println("Welcome to battleship! what would you like to do? \n 1. Player vs. Player \n 2. Player vs. Ai \n 3. AI vs. AI \n 4. Exit");
-=======
-    private int shipCounter = 5;
-
-    BattleshipPlayer bsp = new BattleshipPlayer(null, false);
-
-    public void BSMenu1(){
-=======
-import com.sun.xml.internal.fastinfoset.util.StringArray;
 import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
 
-import java.lang.reflect.Array;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class BattleshipMenu{
@@ -34,8 +16,8 @@ public class BattleshipMenu{
     static int xDir;
     static int yDir;
     static int size;
-    static BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name());
-    static BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name());
+    static BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
+    static BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
 
     BattleshipPlayer bsp = new BattleshipPlayer(null, false);
 
@@ -49,19 +31,14 @@ public class BattleshipMenu{
 
 
     public static void BSMenuPlayer1() {
->>>>>>> Battleship
         Scanner scanner = new Scanner(System.in);
 
         String[] ships = new String[5];
 
-<<<<<<< HEAD
 
 
-        for (int i = 5; i > 0 ; i--) {
-=======
         //We would have to tweak this to run twice, once for each player.
         for (int i = 5; i > 0; i--) {
->>>>>>> Battleship
 
             System.out.println("You are now placing your ships. You have " + shipCounter + " ships left to place. \n" +
                     "Placement order: \n" +
@@ -70,7 +47,6 @@ public class BattleshipMenu{
                     "Cruiser - 3 spots \n" +
                     "Submarine - 3 spots \n" +
                     "Destroyer - 2 spots");
-<<<<<<< HEAD
             shipCounter--;
             System.out.println("Where would you like to place your ship on the board, including direction \n" +
                     "Ex. A5, Left");
@@ -78,14 +54,7 @@ public class BattleshipMenu{
             String pt1 = responseString.substring(0,2).toLowerCase();
             String pt2 = responseString.substring(4).toLowerCase();
 
-=======
-
             //we could possibly show an empty board here
-            System.out.println("Where would you like to place your ship on the board, including direction \n" +
-                    "Ex. A5, Left");
-            String responseString = scanner.nextLine().toLowerCase().trim();
-            String pt1 = responseString.substring(0, 3).toLowerCase();
-            String pt2 = responseString.substring(4).toLowerCase();
 
             if (pt1.contains("a")) {
                 yPos = 0;
@@ -154,14 +123,9 @@ public class BattleshipMenu{
                 size = 2;
             }
             shipCounter--;
-            Player.setShip(xPos, yPos, xDir, yDir, size);
+            Player.setShip(xPos, yPos, xDir, yDir, size, "Temp Name");
             System.out.println(Player.getShipBoard());
             BSMenuPlayer2();
-
-//            System.out.println(pt1);
-//            System.out.println(pt2);
-
-
         }
     }
         public static void BSMenuPlayer2(){
@@ -252,36 +216,11 @@ public class BattleshipMenu{
                     size = 2;
                 }
                 shipCounter2--;
-                Player2.setShip(xPos,yPos,xDir,yDir,size);
+                Player2.setShip(xPos,yPos,xDir,yDir,size, "TempName");
                 System.out.println(Player2.getShipBoard());
                 BSMenuPlayer1();
-
-
-
-
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
             }
         //from here the player is directed towards the integrated hit/miss menu, which checks for sunken ships, as well as accommodates for AIvsAI scenario
         new BattleshipGameplay(new BattleshipPlayer[]{Player, Player2}).gamePlayLoop();
-//        if (scanner.nextLine().equalsIgnoreCase("A")){
-
-//        }
-
-
-
     }
 }
