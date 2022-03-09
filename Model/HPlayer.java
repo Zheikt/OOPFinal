@@ -1,11 +1,14 @@
 package edu.neumont.oop.Model;
 
 import edu.neumont.oop.Controller.CheckersMenu;
+import edu.neumont.oop.View.ConsoleIO;
+
 import java.util.Scanner;
 
     public class HPlayer extends Player {
+        private ConsoleIO message = new ConsoleIO();
         Scanner input = new Scanner(System.in);
-        boolean isRed;
+        private boolean isRed;
 
         public HPlayer(boolean isRed) {
             this.isRed = isRed;
@@ -24,7 +27,7 @@ import java.util.Scanner;
                 possibleMoves = pieceMoving.getAllPossibleMoves(board);
 
                 if (possibleMoves == null)
-                    System.out.println("That piece has no possible moves! Choose a different piece");
+                   message.printMessage("That piece has no possible moves! Choose a different piece");
                 else {
                     displayBoard(board, possibleMoves);
                     Move move = getMoveFromUser(possibleMoves);
@@ -82,7 +85,7 @@ import java.util.Scanner;
             while (true) {
                 String raw;
 
-                System.out.println(getColor() + ", please select a piece by its coordinates (ex. A3):");
+                message.printMessage(getColor() + ", please select a piece by its coordinates (ex. A3):");
                 try {
                     raw = input.nextLine().toLowerCase();
 
@@ -109,13 +112,13 @@ import java.util.Scanner;
                     CheckersPiece userPiece = board.getValueAt(x, y);
 
                     if (userPiece == null)
-                        System.out.println("There's no piece there!\n");
+                        message.printMessage("There's no piece there!\n");
                     else if (userPiece.isRed != this.isRed)
-                        System.out.println("That's not your piece!\n");
+                        message.printMessage("That's not your piece!\n");
                     else
                         return userPiece;
                 } catch (Exception e) {
-                    System.out.println("Please enter a coordinate on the board in the form 'Letter,Number'.");
+                    message.printMessage("Please enter a coordinate on the board in the form 'Letter,Number'.");
                 }
             }
         }
@@ -124,7 +127,7 @@ import java.util.Scanner;
             int moveNum;
 
             while (true) {
-                System.out.println(getColor() + ", please select a move by its number (enter 0 to go back):");
+                message.printMessage(getColor() + ", please select a move by its number (enter 0 to go back):");
                 try {
                     moveNum = input.nextInt();
                     input.nextLine();
@@ -136,7 +139,7 @@ import java.util.Scanner;
 
                     return possibleMoves[moveNum - 1];
                 } catch (Exception e) {
-                    System.out.println("Please enter one of the numbers on the board or 0 to exit.");
+                    message.printMessage("Please enter one of the numbers on the board or 0 to exit.");
                     input.nextLine(); }
             }
         }

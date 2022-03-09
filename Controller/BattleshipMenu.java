@@ -2,10 +2,13 @@ package edu.neumont.oop.Controller;
 
 import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
+import edu.neumont.oop.View.ConsoleIO;
 
 import java.util.Scanner;
 
 public class BattleshipMenu{
+    private static ConsoleIO message = new ConsoleIO();
+
     private static int shipCounter = 5;
     private static int shipCounter2 = 5;
     static MainMenu main = new MainMenu();
@@ -22,8 +25,8 @@ public class BattleshipMenu{
     BattleshipPlayer bsp = new BattleshipPlayer(null, false);
 
     public static void BSIntroMenu(){
-        System.out.println("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
-        System.out.println("///// \n" +
+        message.printMessage("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
+        message.printMessage("///// \n" +
                 "///// \n" +
                 "///// ");
         BSMenuPlayer1();
@@ -40,7 +43,7 @@ public class BattleshipMenu{
         //We would have to tweak this to run twice, once for each player.
         for (int i = 5; i > 0; i--) {
 
-            System.out.println("You are now placing your ships. You have " + shipCounter + " ships left to place. \n" +
+            message.printMessage("You are now placing your ships. You have " + shipCounter + " ships left to place. \n" +
                     "Placement order: \n" +
                     "Carrier - 5 spots \n" +
                     "BattleShip - 4 spots \n" +
@@ -48,7 +51,7 @@ public class BattleshipMenu{
                     "Submarine - 3 spots \n" +
                     "Destroyer - 2 spots");
             shipCounter--;
-            System.out.println("Where would you like to place your ship on the board, including direction \n" +
+            message.printMessage("Where would you like to place your ship on the board, including direction \n" +
                     "Ex. A5, Left");
             String responseString = scanner.nextLine().toLowerCase().trim();
             String pt1 = responseString.substring(0,2).toLowerCase();
@@ -134,7 +137,7 @@ public class BattleshipMenu{
             //We would have to tweak this to run twice, once for each player.
             for (int i = 5; i > 0 ; i--) {
 
-                System.out.println("You are now placing your ships. You have " + shipCounter2 + " ships left to place. \n" +
+                message.printMessage("You are now placing your ships. You have " + shipCounter2 + " ships left to place. \n" +
                         "Placement order: \n" +
                         "Carrier - 5 spots \n" +
                         "BattleShip - 4 spots \n" +
@@ -143,7 +146,7 @@ public class BattleshipMenu{
                         "Destroyer - 2 spots");
 
                 //we could possibly show an empty board here
-                System.out.println("Where would you like to place your ship on the board, including direction \n" +
+                message.printMessage("Where would you like to place your ship on the board, including direction \n" +
                         "Ex. A5, Left");
                 String responseString = scanner.nextLine().toLowerCase().trim();
                 String pt1 = responseString.substring(0, 3).toLowerCase();
