@@ -8,14 +8,13 @@ import java.util.Scanner;
 public class CheckersMenu extends MainMenu{
 
 
-        public static final int SIZE = 8;
-        private static ConsoleIO message = new ConsoleIO();
+        public final int SIZE = 8;
+        private ConsoleIO consoleIO = new ConsoleIO();
 
-        private static Scanner input = new Scanner(System.in);
-        static boolean isPlayer1 = true;
-        private static boolean askIfPlayer2;
+        private Scanner input = new Scanner(System.in);
+        boolean isPlayer1 = true;
 
-        private static boolean endGameNow = false;
+        private boolean endGameNow = false;
 
         public void createBoard(){
             CheckersBoard board = new CheckersBoard(SIZE);
@@ -23,42 +22,32 @@ public class CheckersMenu extends MainMenu{
             Player player1;
             Player player2;
 
-            if (isAskIfPlayer2()) {
+            if (askIfTwoPlayer()) {
                 player1 = new HPlayer(true);
                 player2 = new HPlayer(false);
             } else {
                 player1 = new HPlayer(true);
                 player2 = new AI(false);
             }
-            CheckersMenu.clearScreen();
 
-            while ( !CheckersMenu.endGame(board) ) {
-                if (CheckersMenu.isPlayer1) {
+            while ( !endGame(board) ) {
+                if (isPlayer1) {
                     board = player1.getMove(board);
                 } else {
                     board = player2.getMove(board);
                 }
 
-                boolean isPlayer1 = !CheckersMenu.isPlayer1;
+                isPlayer1 = !isPlayer1;
             }
         }
 
-    public static boolean isAskIfPlayer2() {
-        return askIfPlayer2;
-    }
-
-    public static void setAskIfPlayer2(boolean askIfPlayer2) {
-        CheckersMenu.askIfPlayer2 = askIfPlayer2;
-    }
-
-    static boolean askIfTwoPlayer() {
+        private boolean askIfTwoPlayer() {
             while (true) {
-                clearScreen();
-                message.printMessage("Welcome to checkers!\n");
-                message.printMessage("Choose your mode!");
-                message.printMessage("1: Player VS Computer");
-                message.printMessage("2: Player VS Player");
-                message.printMessage("\nWhich one would you like to play? Enter a number or choose to exit: ");
+                consoleIO.printMessage("Welcome to checkers!\n");
+                consoleIO.printMessage("Choose your mode!");
+                consoleIO.printMessage("1: Player VS Computer");
+                consoleIO.printMessage("2: Player VS Player");
+                consoleIO.printMessage("\nWhich one would you like to play? Enter a number or choose to exit: ");
 
                 String response = input.nextLine();
                 switch (response.trim()) {
@@ -73,7 +62,7 @@ public class CheckersMenu extends MainMenu{
             }
         }
 
-        static boolean endGame(CheckersBoard board) {
+        private boolean endGame(CheckersBoard board) {
             if (endGameNow) {
             } else {
                 int movableWhiteNum = 0;
@@ -91,22 +80,18 @@ public class CheckersMenu extends MainMenu{
                 }
 
                 if (movableWhiteNum + movableBlackNum == 0)
-                    message.printMessage("The game was a stalemate");
+                    consoleIO.printMessage("The game was a stalemate");
                 else if (movableWhiteNum == 0)
-                    message.printMessage("Congratulations, Black, you won!");
+                    consoleIO.printMessage("Congratulations, Black, you won!");
                 else if (movableBlackNum == 0)
-                    message.printMessage("Congratulations, Red, you won!");
+                    consoleIO.printMessage("Congratulations, Red, you won!");
                 else
                     return false;
             }
             return true;
         }
 
-        public static void endGameNow() {
+        public void endGameNow() {
             endGameNow = true;
-        }
-
-        public static void clearScreen(){
-            System.out.print("\033[2J\033[1;1H");
         }
     }

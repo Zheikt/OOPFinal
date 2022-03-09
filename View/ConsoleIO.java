@@ -48,6 +48,30 @@ public class ConsoleIO {
         while(targetPosition[0] == -1) {
             printMessage(prompt);
             String targetStr = getString();
+            targetPosition = getAlphaNumericCoords(minLetter, maxLetter, minNum, maxSingleNum, maxMultiNum, isXNumeric, targetStr);
+//            if (targetStr == null || targetStr.trim().isEmpty()) {
+//                printMessage("Target string cannot be null, empty, or all whitespaces.");
+//            } else {
+//                char targetLetter = targetStr.toLowerCase().trim().charAt(0);
+//                String targetNumberStr = targetStr.trim().substring(1);
+//                //Check to make sure there is a number in the string
+//                if ((!targetNumberStr.equals(maxMultiNum) && targetNumberStr.length() > 1) || targetNumberStr.charAt(0) < minNum || targetNumberStr.charAt(0) > maxSingleNum || (targetLetter < minLetter || targetLetter > maxLetter)) {
+//                    printMessage("Invalid target string. Must only contain a letter" + minLetter +  "-" + maxLetter + " and a number"+ minNum + "-" + (maxMultiNum.isEmpty() ? maxSingleNum : maxMultiNum));
+//                } else {
+//                    char letterNum = (char) (targetLetter - 49);
+//                    targetPosition[0] = isXNumeric ? (Integer.parseInt(targetNumberStr) - 1) : Integer.parseInt("" + letterNum);
+//                    targetPosition[1] = isXNumeric ? Integer.parseInt("" + letterNum) : (Integer.parseInt(targetNumberStr) - 1);
+//                }
+//            }
+        }
+
+        return targetPosition;
+    }
+
+    public int[] getAlphaNumericCoords(char minLetter, char maxLetter, char minNum, char maxSingleNum, String maxMultiNum, boolean isXNumeric, String coords){ //This is far too specific. Either generalize for Checkers and Battleship or make View classes for each game.
+        //how to account for double digits or greater?
+        int[] targetPosition = new int[] {-1,-1}; //always store in form (xPos, yPos) - (equivalent to column, row)
+            String targetStr = coords;
             if (targetStr == null || targetStr.trim().isEmpty()) {
                 printMessage("Target string cannot be null, empty, or all whitespaces.");
             } else {
@@ -62,7 +86,6 @@ public class ConsoleIO {
                     targetPosition[1] = isXNumeric ? Integer.parseInt("" + letterNum) : (Integer.parseInt(targetNumberStr) - 1);
                 }
             }
-        }
 
         return targetPosition;
     }

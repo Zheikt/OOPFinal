@@ -21,8 +21,8 @@ public class BattleshipPlayer extends Player{
     //Maybe this should be in the class that sets up the Battleship Game
     public void setShip(int xPos, int yPos, int xDir, int yDir, int size, String name) throws IllegalArgumentException{ //Maybe this should be part of a Controller? Some error handling can be taken care of in a View when getting the info
         //Maybe change this to be recursive so that it checks each space as it goes to ensure it doesn't overlap with another ship
-        if(xDir != 0 && yDir != 0){
-            throw new IllegalArgumentException("Ship cannot be placed diagonally. X-Direction or Y-Direction must be 0. X-Dir: " + xDir + " Y-Dir: " + yDir);
+        if((xDir != 0 && yDir != 0) || (xDir == 0 && yDir == 0)){
+            throw new IllegalArgumentException("Ship cannot be placed diagonally. X-Direction or Y-Direction must be 0, but not both. X-Dir: " + xDir + " Y-Dir: " + yDir);
         }
 
         if(yPos < 0 || yPos >= shipBoard.getBoard().length){
@@ -33,7 +33,7 @@ public class BattleshipPlayer extends Player{
             throw new IllegalArgumentException("Illegal x-position. Must be between 0 and " + (shipBoard.getBoard()[yPos].length - 1) + ". X-Position: " + xPos);
         }
 
-        if(xPos + (xDir * size) < 0 || xPos + (xDir * size) > shipBoard.getBoard()[yPos].length){
+        if(xPos + (xDir * size) < -1 || xPos + (xDir * size) > shipBoard.getBoard()[yPos].length){
             throw new IllegalArgumentException("Illegal x-position for given direction. Ship doesn't have space to be placed");
         }
 

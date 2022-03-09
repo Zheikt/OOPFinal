@@ -90,7 +90,7 @@ import java.util.Scanner;
                     raw = input.nextLine().toLowerCase();
 
                     if (raw.equalsIgnoreCase("exit")) {
-                        CheckersMenu.endGameNow();
+                        new CheckersMenu().endGameNow();
                         return null;
                     } else if (raw.length() < 2)
                         throw new Exception();

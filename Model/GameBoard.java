@@ -19,7 +19,7 @@ public abstract class GameBoard {
     protected void initializeBoard(){
         for (int row = 0; row < ROWS; row++) {
             for (int column = 0; column < COLUMNS; column++) {
-                board[row][column] = new Token("");
+                board[row][column] = null;
             }
         }
     }
