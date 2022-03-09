@@ -42,7 +42,7 @@ public class ConsoleIO {
         return "" + userInput;
     }
 
-    public int[] getAlphaNumericCoords(String prompt, char minX, char maxSingleX, String maxMultiX, char minY, char maxSingleY, String maxMultiY, boolean isXNumeric){ //This is far too specific. Either generalize for Checkers and Battleship or make View classes for each game.
+    public int[] getAlphaNumericCoords(String prompt, char minLetter, char maxLetter, char minNum, char maxSingleNum, String maxMultiNum, boolean isXNumeric){ //This is far too specific. Either generalize for Checkers and Battleship or make View classes for each game.
         //how to account for double digits or greater?
         int[] targetPosition = new int[] {-1,-1}; //always store in form (xPos, yPos) - (equivalent to column, row)
         while(targetPosition[0] == -1) {
@@ -54,12 +54,12 @@ public class ConsoleIO {
                 char targetLetter = targetStr.toLowerCase().trim().charAt(0);
                 String targetNumberStr = targetStr.trim().substring(1);
                 //Check to make sure there is a number in the string
-                if ((!targetNumberStr.equals("10") && targetNumberStr.length() > 1) || targetNumberStr.charAt(0) < '1' || targetNumberStr.charAt(0) > '9' || (targetLetter < 'a' || targetLetter > 'j')) {
-                    printMessage("Invalid target string. Must only contain a letter a-j and a number 1-10");
+                if ((!targetNumberStr.equals(maxMultiNum) && targetNumberStr.length() > 1) || targetNumberStr.charAt(0) < minNum || targetNumberStr.charAt(0) > maxSingleNum || (targetLetter < minLetter || targetLetter > maxLetter)) {
+                    printMessage("Invalid target string. Must only contain a letter" + minLetter +  "-" + maxLetter + " and a number"+ minNum + "-" + (maxMultiNum.isEmpty() ? maxSingleNum : maxMultiNum));
                 } else {
-                    char rowNum = (char) (targetLetter - 49);
-                    targetPosition[0] = Integer.parseInt(targetNumberStr) - 1;
-                    targetPosition[1] = Integer.parseInt("" + rowNum);
+                    char letterNum = (char) (targetLetter - 49);
+                    targetPosition[0] = isXNumeric ? (Integer.parseInt(targetNumberStr) - 1) : Integer.parseInt("" + letterNum);
+                    targetPosition[1] = isXNumeric ? Integer.parseInt("" + letterNum) : (Integer.parseInt(targetNumberStr) - 1);
                 }
             }
         }

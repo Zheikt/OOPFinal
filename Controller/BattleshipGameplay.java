@@ -40,11 +40,9 @@ public class BattleshipGameplay {
 
     private String humanTurn(int currentPlayer){
         int[] targetPosition = {-1, -1};
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn. Where would you like to fire? ");
+        consoleIO.printMessage(players[currentPlayer].getGuessBoard() + "\nIt is " + players[currentPlayer].getName() + " turn.");
         while(targetPosition[0] == -1) {
-            String target = scanner.nextLine();
-            targetPosition = validateTarget(target, players[currentPlayer]);
+            targetPosition = validateTarget(players[currentPlayer]);
         }
         boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
         players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
@@ -57,22 +55,27 @@ public class BattleshipGameplay {
         int[] targetPosition = {-1, -1};
         while(targetPosition[0] == -1){
             String targetStr = "" + (char)(generator.nextInt(10) + 97) + (generator.nextInt(10) + 1);
-            targetPosition = validateTarget(targetStr, players[currentPlayer]);
+            targetPosition[0] = Integer.parseInt(targetStr.substring(1)) - 1;
+            targetPosition[1] = Integer.parseInt("" + ((char)(targetStr.charAt(0) - 49)));
+            if (players[currentPlayer].getGuessBoard().getCell(targetPosition[0], targetPosition[1]) != null) {
+                targetPosition[0] = -1;
+            }
         }
         boolean hitResult = checkForHit(targetPosition, players[(currentPlayer + 1) % 2]);
         players[currentPlayer].getGuessBoard().setCell(targetPosition[0], targetPosition[1], new Token(hitResult ? "\u001B[38;5;196m" : "\u001B[38;5;255m"));
         return players[currentPlayer].getName() + "'s shot was a " + (hitResult ? "Hit!" : "Miss.");
     }
 
-    private int[] validateTarget(String targetStr, BattleshipPlayer currentPlayer){
-        int[] targetPosition = consoleIO.getAlphaNumericCoords("Where would you like to shoot?", '1' ,'9',
-                "10", 'a', 'j', "", true); //always store in form (xPos, yPos) - (equivalent to column, row)
+    private int[] validateTarget(BattleshipPlayer currentPlayer){
+        int[] targetPosition = new int[] {-1,-1};
+        while(targetPosition[0] == -1) {
+            targetPosition = consoleIO.getAlphaNumericCoords("\nWhere would you like to fire?", 'a', 'j',
+                    '1', '9', "10", true); //always store in form (xPos, yPos) - (equivalent to column, row)
 
-
-        if(currentPlayer.getGuessBoard().getCell(targetPosition[0], targetPosition[1]) != null){
-            System.out.println("That area has already been targeted. Please choose a different spot.");
-            targetPosition[0] = -1;
-            return targetPosition;
+            if (currentPlayer.getGuessBoard().getCell(targetPosition[0], targetPosition[1]) != null) {
+                consoleIO.printMessage("That area has already been targeted. Please choose a different spot.");
+                targetPosition[0] = -1;
+            }
         }
 
         return targetPosition;
