@@ -3,12 +3,14 @@ package edu.neumont.oop.Controller;
 import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
 import edu.neumont.oop.Model.Token;
+import edu.neumont.oop.View.ConsoleIO;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class BattleshipGameplay {
     private BattleshipPlayer[] players;
+    private ConsoleIO consoleIO = new ConsoleIO();
 
     public BattleshipGameplay(BattleshipPlayer[] players){
         this.players = players;
@@ -63,23 +65,9 @@ public class BattleshipGameplay {
     }
 
     private int[] validateTarget(String targetStr, BattleshipPlayer currentPlayer){
-        int[] targetPosition = new int[] {-1,-1}; //always store in form (xPos, yPos) - (equivalent to column, row)
-        if(targetStr == null || targetStr.trim().isEmpty()){
-            System.out.println("Target string cannot be null, empty, or all whitespaces.");
-            return targetPosition;
-        }
-        char targetLetter = targetStr.toLowerCase().trim().charAt(0);
-        String targetNumberStr = targetStr.trim().substring(1);
-        //Check to make sure there is a number in the string
-        if((!targetNumberStr.equals("10") && targetNumberStr.length() > 1) || targetNumberStr.charAt(0) < '1' || targetNumberStr.charAt(0) > '9' || (targetLetter < 'a' || targetLetter > 'j')){
-            System.out.println("Invalid target string. Must only contain a letter a-j and a number 1-10");
-            return targetPosition;
-        }
+        int[] targetPosition = consoleIO.getAlphaNumericCoords("Where would you like to shoot?", '1' ,'9',
+                "10", 'a', 'j', "", true); //always store in form (xPos, yPos) - (equivalent to column, row)
 
-        char rowNum = (char) (targetLetter - 49);
-
-        targetPosition[0] = Integer.parseInt(targetNumberStr) - 1;
-        targetPosition[1] = Integer.parseInt("" + rowNum);
 
         if(currentPlayer.getGuessBoard().getCell(targetPosition[0], targetPosition[1]) != null){
             System.out.println("That area has already been targeted. Please choose a different spot.");
