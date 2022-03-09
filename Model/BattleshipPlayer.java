@@ -1,6 +1,5 @@
 package edu.neumont.oop.Model;
 
-import edu.neumont.oop.View.ConsoleIO;
 
 public class BattleshipPlayer extends Player{
     private BattleshipGameBoard shipBoard;

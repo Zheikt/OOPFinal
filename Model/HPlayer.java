@@ -6,7 +6,7 @@ import edu.neumont.oop.View.ConsoleIO;
 import java.util.Scanner;
 
     public class HPlayer extends Player {
-        private ConsoleIO message = new ConsoleIO();
+        private ConsoleIO consoleIO = new ConsoleIO();
         Scanner input = new Scanner(System.in);
         private boolean isRed;
 
@@ -28,7 +28,7 @@ import java.util.Scanner;
                 possibleMoves = pieceMoving.getAllPossibleMoves(board);
 
                 if (possibleMoves == null)
-                   message.printMessage("That piece has no possible moves! Choose a different piece");
+                   consoleIO.printMessage("That piece has no possible moves! Choose a different piece");
                 else {
                     displayBoard(board, possibleMoves);
                     Move move = getMoveFromUser(possibleMoves);
@@ -42,7 +42,6 @@ import java.util.Scanner;
         }
 
         private void displayBoard(CheckersBoard board, Move[] possibleMoves) {
-            CheckersMenu.clearScreen();
 
             for (int y = -1; y < board.size; y++) {
                 for (int x = -1; x < board.size; x++) {
@@ -86,7 +85,7 @@ import java.util.Scanner;
             while (true) {
                 String raw;
 
-                message.printMessage(getColor() + ", please select a piece by its coordinates (ex. A3):");
+                consoleIO.printMessage(getColor() + ", please select a piece by its coordinates (ex. A3):");
                 try {
                     raw = input.nextLine().toLowerCase();
 
@@ -113,13 +112,13 @@ import java.util.Scanner;
                     CheckersPiece userPiece = board.getValueAt(x, y);
 
                     if (userPiece == null)
-                        message.printMessage("There's no piece there!\n");
+                        consoleIO.printMessage("There's no piece there!\n");
                     else if (userPiece.isRed != this.isRed)
-                        message.printMessage("That's not your piece!\n");
+                        consoleIO.printMessage("That's not your piece!\n");
                     else
                         return userPiece;
                 } catch (Exception e) {
-                    message.printMessage("Please enter a coordinate on the board in the form 'Letter,Number'.");
+                    consoleIO.printMessage("Please enter a coordinate on the board in the form 'Letter,Number'.");
                 }
             }
         }
@@ -128,7 +127,7 @@ import java.util.Scanner;
             int moveNum;
 
             while (true) {
-                message.printMessage(getColor() + ", please select a move by its number (enter 0 to go back):");
+                consoleIO.printMessage(getColor() + ", please select a move by its number (enter 0 to go back):");
                 try {
                     moveNum = input.nextInt();
                     input.nextLine();
@@ -140,7 +139,7 @@ import java.util.Scanner;
 
                     return possibleMoves[moveNum - 1];
                 } catch (Exception e) {
-                    message.printMessage("Please enter one of the numbers on the board or 0 to exit.");
+                    consoleIO.printMessage("Please enter one of the numbers on the board or 0 to exit.");
                     input.nextLine(); }
             }
         }
