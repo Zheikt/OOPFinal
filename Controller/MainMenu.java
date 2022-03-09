@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class MainMenu{
-    private static ConsoleIO message = new ConsoleIO();
+    private ConsoleIO message = new ConsoleIO();
     BattleshipMenu bsMenu = new BattleshipMenu();
     private String Player1Name;
     private String Player2Name;
@@ -32,15 +32,15 @@ public class MainMenu{
     public void introduction(){
         message.printMessage("Welcome to the -VERY LARGE- Game collection! \n" +
                 "We have plenty of games here, not limited to \n" +
-                "Battleship and Checkers!");
+                "Battleship and Checkers! \n");
         menu1();
     }
     public void menu1(){
         message.printMessage("First things first. Can I get your name?");
         String name1 = scanner.nextLine();
         setPlayer1Name(name1);
-        message.printMessage("Thank you.");
-        message.printMessage("////////////////////////////////////////////////////////////");
+        message.printMessage("Thank you. \n");
+        message.printMessage("//////////////////////////////////////////////////////////// \n");
         message.printMessage("Next thing on the Agenda. How would you like to play today? We have a couple options for ya: \n" +
                 "1. Player Vs Player \n" +
                 "2. Player Vs AI \n" +
@@ -74,12 +74,12 @@ public class MainMenu{
     }
 
     public void menu2(){
-        message.printMessage("////////////////////////////////////////////////////////////////////////////////////////////////////////////////// \n" +
+        message.printMessage(" \n ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// \n" +
                 "WELCOME TO THE GAME SELECTION MENU!!! \n" +
-                "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-        message.printMessage("So, what would you like to choose? You can say 'Battleship' or 1 for Battleship and 'Checkers' or 2 for Checkers");
-        message.printMessage("Please note, if you leave this space blank or put in anything else, we as the system will yell at you.");
-        message.printMessage("You can also say exit, but that would exit the code without playing any games :(");
+                "////////////////////////////////////////////////////////////////////////////////////////////////////////////////// \n");
+        message.printMessage("So, what would you like to choose? You can say 'Battleship' or 1 for Battleship and 'Checkers' or 2 for Checkers \n");
+        message.printMessage("Please note, if you leave this space blank or put in anything else, we as the system will yell at you. \n");
+        message.printMessage("You can also say exit, but that would exit the code without playing any games :( \n");
         String response = scanner.nextLine();
         if(response.equalsIgnoreCase("Battleship") || response.equalsIgnoreCase("1")) {
             bsMenu.BSIntroMenu();

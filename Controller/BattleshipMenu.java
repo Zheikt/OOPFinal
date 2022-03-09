@@ -11,7 +11,7 @@ public class BattleshipMenu{
 
     private int shipCounter = 5;
     private int shipCounter2 = 5;
-    static MainMenu main = new MainMenu();
+    MainMenu main = new MainMenu();
 
     BattleshipGameBoard bsgb = new BattleshipGameBoard();
     private int xPos;
@@ -19,16 +19,17 @@ public class BattleshipMenu{
     private int xDir;
     private int yDir;
     private int size;
-    static BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
-    static BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
+    private String name;
+    BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
+    BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
 
     BattleshipPlayer bsp = new BattleshipPlayer(null, false);
 
     public void BSIntroMenu(){
-        message.printMessage("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
+        message.printMessage("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship. \n" );
         message.printMessage("///// \n" +
                 "///// \n" +
-                "///// ");
+                "///// \n ");
         BSMenuPlayer1();
     }
 
@@ -112,17 +113,22 @@ public class BattleshipMenu{
             }
             if (shipCounter == 5) {
                 size = 5;
+                name = "Carrier";
             } else if (shipCounter == 4) {
                 size = 4;
+                name = "Battleship";
             } else if (shipCounter == 3) {
                 size = 3;
+                name = "Cruiser";
             } else if (shipCounter == 2) {
                 size = 3;
+                name = "Submarine";
             } else if (shipCounter == 1) {
                 size = 2;
+                name = "Destroyer";
             }
             shipCounter--;
-            Player.setShip(xPos, yPos, xDir, yDir, size, "Temp Name");
+            Player.setShip(xPos, yPos, xDir, yDir, size, name);
             System.out.println(Player.getShipBoard());
             BSMenuPlayer2();
         }
@@ -205,17 +211,22 @@ public class BattleshipMenu{
                 }
                 if(shipCounter2 == 5){
                     size = 5;
+                    name = "Carrier";
                 } else if(shipCounter2 == 4){
                     size = 4;
+                    name = "Battleship";
                 }else if(shipCounter2 == 3){
                     size = 3;
+                    name = "Cruiser";
                 }else if(shipCounter2 == 2){
                     size = 3;
+                    name = "Submarine";
                 }else if(shipCounter2 == 1){
                     size = 2;
+                    name = "Destroyer";
                 }
                 shipCounter2--;
-                Player2.setShip(xPos,yPos,xDir,yDir,size, "TempName");
+                Player2.setShip(xPos,yPos,xDir,yDir,size, name);
                 System.out.println(Player2.getShipBoard());
                 BSMenuPlayer1();
             }
