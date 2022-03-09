@@ -9,20 +9,20 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class BattleshipMenu{
-    private int shipCounter = 5;
-    MainMenu main = new MainMenu();
+    private static int shipCounter = 5;
+    static MainMenu main = new MainMenu();
 
     BattleshipGameBoard bsgb = new BattleshipGameBoard();
-    int xPos;
-    int yPos;
-    int xDir;
-    int yDir;
-    int size;
-    BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name());
-    BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name());
+    static int xPos;
+    static int yPos;
+    static int xDir;
+    static int yDir;
+    static int size;
+    static BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name());
+    static BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name());
 
 
-    public void BSIntroMenu(){
+    public static void BSIntroMenu(){
         System.out.println("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
         System.out.println("///// \n" +
                 "///// \n" +
@@ -31,7 +31,7 @@ public class BattleshipMenu{
     }
 
 
-    public void BSMenu1(){
+    public static void BSMenu1(){
         Scanner scanner = new Scanner(System.in);
 
         String[] ships = new String[5];

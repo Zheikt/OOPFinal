@@ -34,7 +34,7 @@ public class MainMenu{
     }
     public void menu1(){
         System.out.println("First things first. Can I get your name?");
-        String PlayerName = scanner.nextLine();
+        setPlayer1Name(scanner.nextLine());
         System.out.println("Thank you.");
         System.out.println("////////////////////////////////////////////////////////////");
         System.out.println("Next thing on the Agenda. How would you like to play today? We have a couple options for ya: \n" +
@@ -46,7 +46,7 @@ public class MainMenu{
         switch (response){
             case 1:
                 System.out.println("What is gonna be the name of player 2?");
-                String Player2Name = scanner.nextLine();
+                setPlayer2Name(scanner.nextLine());
                 System.out.println("Directing you to the game selection menu now...");
                 menu2();
             case 2:
@@ -77,7 +77,7 @@ public class MainMenu{
         System.out.println("You can also say exit, but that would exit the code without playing any games :(");
         String response = scanner.nextLine();
         if(response.equalsIgnoreCase("Battleship") || response.equalsIgnoreCase("1")) {
-            bsMenu.BSIntroMenu();
+            BattleshipMenu.BSIntroMenu();
         }
         else if(response.equalsIgnoreCase("Checkers") || response.equalsIgnoreCase("2")){
                 //checkers menu goes here
