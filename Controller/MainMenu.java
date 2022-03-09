@@ -10,8 +10,7 @@ public class MainMenu {
     public void introduction(){
         System.out.println("Welcome to the -VERY LARGE- Game collection! \n" +
                 "We have plenty of games here, not limited to \n" +
-                "Battleship!.... \n" +
-                "and Checkers!");
+                "Battleship and Checkers!");
         menu1();
     }
     public void menu1(){
