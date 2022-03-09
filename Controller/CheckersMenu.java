@@ -5,7 +5,7 @@ import edu.neumont.oop.View.ConsoleIO;
 
 import java.util.Scanner;
 
-public class CheckersMenu {
+public class CheckersMenu extends MainMenu{
 
 
         public final int SIZE = 8;

@@ -1,29 +1,30 @@
 package edu.neumont.oop.Controller;
 
-import edu.neumont.oop.Model.BattleshipGameBoard;
 import edu.neumont.oop.Model.BattleshipPlayer;
 import edu.neumont.oop.View.ConsoleIO;
 
 import java.util.Scanner;
 
 public class BattleshipMenu{
-    private static ConsoleIO message = new ConsoleIO();
+    private ConsoleIO message = new ConsoleIO();
 
     private int shipCounter = 5;
     private int shipCounter2 = 5;
-    MainMenu main = new MainMenu();
 
-    BattleshipGameBoard bsgb = new BattleshipGameBoard();
+
     private int xPos;
     private int yPos;
     private int xDir;
     private int yDir;
     private int size;
     private String name;
-    BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
-    BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
+    BattleshipPlayer player;
+    BattleshipPlayer player2;
 
-    BattleshipPlayer bsp = new BattleshipPlayer(null, false);
+    public BattleshipMenu(String player1Name, String player2Name, boolean player1IsHuman, boolean player2IsHuman){
+        player = new BattleshipPlayer(player1Name, player1IsHuman);
+        player2 = new BattleshipPlayer(player2Name, player2IsHuman);
+    }
 
     public void BSIntroMenu(){
         message.printMessage("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship. \n" );
@@ -128,8 +129,8 @@ public class BattleshipMenu{
                 name = "Destroyer";
             }
             shipCounter--;
-            Player.setShip(xPos, yPos, xDir, yDir, size, name);
-            System.out.println(Player.getShipBoard());
+            player.setShip(xPos, yPos, xDir, yDir, size, name);
+            System.out.println(player.getShipBoard());
             BSMenuPlayer2();
         }
     }
@@ -226,11 +227,11 @@ public class BattleshipMenu{
                     name = "Destroyer";
                 }
                 shipCounter2--;
-                Player2.setShip(xPos,yPos,xDir,yDir,size, name);
-                System.out.println(Player2.getShipBoard());
+                player2.setShip(xPos,yPos,xDir,yDir,size, name);
+                System.out.println(player2.getShipBoard());
                 BSMenuPlayer1();
             }
         //from here the player is directed towards the integrated hit/miss menu, which checks for sunken ships, as well as accommodates for AIvsAI scenario
-        new BattleshipGameplay(new BattleshipPlayer[]{Player, Player2}).gamePlayLoop();
+        new BattleshipGameplay(new BattleshipPlayer[]{player, player2}).gamePlayLoop();
     }
 }
