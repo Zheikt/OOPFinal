@@ -8,20 +8,19 @@ import java.lang.reflect.Array;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class BattleshipMenu  {
+public class BattleshipMenu{
     private int shipCounter = 5;
+    MainMenu main = new MainMenu();
+
     BattleshipGameBoard bsgb = new BattleshipGameBoard();
     int xPos;
     int yPos;
     int xDir;
     int yDir;
     int size;
-    BattleshipPlayer testPlayer = new BattleshipPlayer("Tester");
-    BattleshipPlayer testPlayer2 = new BattleshipPlayer("Tester 2");
+    BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name());
+    BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name());
 
-
-
-    BattleshipPlayer bsp = new BattleshipPlayer("");
 
     public void BSIntroMenu(){
         System.out.println("Imagine. You're a naval commander in charge of your own fleet. Your enemy looms before you. Welcome to battleship." );
@@ -38,7 +37,7 @@ public class BattleshipMenu  {
         String[] ships = new String[5];
 
 
-
+        //We would have to tweak this to run twice, once for each player.
         for (int i = 5; i > 0 ; i--) {
 
             System.out.println("You are now placing your ships. You have " + shipCounter + " ships left to place. \n" +
@@ -53,31 +52,31 @@ public class BattleshipMenu  {
             System.out.println("Where would you like to place your ship on the board, including direction \n" +
                     "Ex. A5, Left");
             String responseString = scanner.nextLine().toLowerCase().trim();
-            String pt1 = responseString.substring(0, 2).toLowerCase();
+            String pt1 = responseString.substring(0, 3).toLowerCase();
             String pt2 = responseString.substring(4).toLowerCase();
 
-            if (pt1.contains("A")) {
+            if (pt1.contains("a")) {
                  yPos = 0;
-            } else if (pt1.contains("B")) {
+            } else if (pt1.contains("b")) {
                  yPos = 1;
-            } else if (pt1.contains("C")) {
+            } else if (pt1.contains("c")) {
                  yPos = 2;
-            } else if (pt1.contains("D")) {
+            } else if (pt1.contains("d")) {
                  yPos = 3;
-            } else if (pt1.contains("E")) {
+            } else if (pt1.contains("e")) {
                  yPos = 4;
-            } else if (pt1.contains("F")) {
+            } else if (pt1.contains("f")) {
                  yPos = 5;
-            } else if (pt1.contains("G")) {
+            } else if (pt1.contains("g")) {
                  yPos = 6;
-            } else if (pt1.contains("H")) {
+            } else if (pt1.contains("h")) {
                  yPos = 7;
-            } else if (pt1.contains("I")) {
+            } else if (pt1.contains("i")) {
                  yPos = 8;
-            } else if (pt1.contains("J")) {
+            } else if (pt1.contains("j")) {
                  yPos = 9;
             }
-                if (pt1.contains("1")) {
+            if (pt1.contains("1")) {
                      xPos = 0;
                 } else if (pt1.contains("2")) {
                      xPos = 1;
@@ -95,8 +94,8 @@ public class BattleshipMenu  {
                      xPos = 7;
                 } else if (pt1.contains("9")) {
                      xPos = 8;
-                } else if (pt1.contains("10")) {
-                     xPos = 9;
+                } else if (pt1.contains("10")){
+                    xPos = 9;
                 }
                 if (pt2.equalsIgnoreCase("Left")){
                     xDir = -1;
@@ -123,8 +122,8 @@ public class BattleshipMenu  {
                     size = 2;
                 }
                 shipCounter--;
-                testPlayer.setShip(xPos,yPos,xDir,yDir,size);
-                System.out.println(testPlayer.getShipBoard());
+                Player.setShip(xPos,yPos,xDir,yDir,size);
+                System.out.println(Player.getShipBoard());
 
 
 
@@ -136,7 +135,7 @@ public class BattleshipMenu  {
 
         }
         //from here the player is directed towards the integrated hit/miss menu, which checks for sunken ships, as well as accommodates for AIvsAI scenario
-        new BattleshipGameplay(new BattleshipPlayer[]{testPlayer, testPlayer2}).gamePlayLoop();
+        new BattleshipGameplay(new BattleshipPlayer[]{Player, Player2}).gamePlayLoop();
 //        if (scanner.nextLine().equalsIgnoreCase("A")){
 
 //        }

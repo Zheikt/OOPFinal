@@ -2,10 +2,29 @@ package edu.neumont.oop.Controller;
 
 import java.util.Scanner;
 
-public class MainMenu {
+public class MainMenu{
+    BattleshipMenu bsMenu = new BattleshipMenu();
+    private String Player1Name;
+    private String Player2Name;
+
+    public String getPlayer1Name() {
+        return Player1Name;
+    }
+
+    public void setPlayer1Name(String player1Name) {
+        Player1Name = player1Name;
+    }
+
+    public String getPlayer2Name() {
+        return Player2Name;
+    }
+
+    public void setPlayer2Name(String player2Name) {
+        Player2Name = player2Name;
+    }
 
     Scanner scanner = new Scanner(System.in);
-    BattleshipMenu bsMenu = new BattleshipMenu();
+
 
     public void introduction(){
         System.out.println("Welcome to the -VERY LARGE- Game collection! \n" +
