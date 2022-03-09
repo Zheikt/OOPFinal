@@ -7,20 +7,20 @@ import edu.neumont.oop.View.ConsoleIO;
 import java.util.Scanner;
 
 public class BattleshipMenu{
-    private static ConsoleIO message = new ConsoleIO();
+    private ConsoleIO message = new ConsoleIO();
 
     private int shipCounter = 5;
     private int shipCounter2 = 5;
-    static MainMenu main = new MainMenu();
+    MainMenu main = new MainMenu();
 
     BattleshipGameBoard bsgb = new BattleshipGameBoard();
-    private int xPos;
-    private int yPos;
-    private int xDir;
-    private int yDir;
-    private int size;
-    static BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
-    static BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
+    int xPos;
+    int yPos;
+    int xDir;
+    int yDir;
+    int size;
+    BattleshipPlayer Player = new BattleshipPlayer(main.getPlayer1Name(), true);
+    BattleshipPlayer Player2 = new BattleshipPlayer(main.getPlayer2Name(), true);
 
     BattleshipPlayer bsp = new BattleshipPlayer(null, false);
 
@@ -35,6 +35,10 @@ public class BattleshipMenu{
 
     public void BSMenuPlayer1() {
         Scanner scanner = new Scanner(System.in);
+
+        String[] ships = new String[5];
+
+
 
         //We would have to tweak this to run twice, once for each player.
         for (int i = 5; i > 0; i--) {

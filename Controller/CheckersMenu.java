@@ -8,14 +8,13 @@ import java.util.Scanner;
 public class CheckersMenu {
 
 
-        public static final int SIZE = 8;
-        private static ConsoleIO message = new ConsoleIO();
+        public final int SIZE = 8;
+        private ConsoleIO message = new ConsoleIO();
 
-        private static Scanner input = new Scanner(System.in);
-        static boolean isPlayer1 = true;
-        private static boolean askIfPlayer2;
+        private Scanner input = new Scanner(System.in);
+        boolean isPlayer1 = true;
 
-        private static boolean endGameNow = false;
+        private boolean endGameNow = false;
 
         public void createBoard(){
             CheckersBoard board = new CheckersBoard(SIZE);
@@ -23,14 +22,13 @@ public class CheckersMenu {
             Player player1;
             Player player2;
 
-            if (isAskIfPlayer2()) {
+            if (CheckersMenu.askIfTwoPlayer()) {
                 player1 = new HPlayer(true);
                 player2 = new HPlayer(false);
             } else {
                 player1 = new HPlayer(true);
                 player2 = new AI(false);
             }
-            CheckersMenu.clearScreen();
 
             while ( !CheckersMenu.endGame(board) ) {
                 if (CheckersMenu.isPlayer1) {
@@ -43,17 +41,8 @@ public class CheckersMenu {
             }
         }
 
-    public static boolean isAskIfPlayer2() {
-        return askIfPlayer2;
-    }
-
-    public static void setAskIfPlayer2(boolean askIfPlayer2) {
-        CheckersMenu.askIfPlayer2 = askIfPlayer2;
-    }
-
-    static boolean askIfTwoPlayer() {
+        boolean askIfTwoPlayer() {
             while (true) {
-                clearScreen();
                 message.printMessage("Welcome to checkers!\n");
                 message.printMessage("Choose your mode!");
                 message.printMessage("1: Player VS Computer");
@@ -73,7 +62,7 @@ public class CheckersMenu {
             }
         }
 
-        static boolean endGame(CheckersBoard board) {
+        boolean endGame(CheckersBoard board) {
             if (endGameNow) {
             } else {
                 int movableWhiteNum = 0;
@@ -102,11 +91,7 @@ public class CheckersMenu {
             return true;
         }
 
-        public static void endGameNow() {
+        public void endGameNow() {
             endGameNow = true;
-        }
-
-        public static void clearScreen(){
-            System.out.print("\033[2J\033[1;1H");
         }
     }

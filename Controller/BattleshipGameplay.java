@@ -29,7 +29,7 @@ public class BattleshipGameplay {
             result.append(players[currentPlayer].isHuman() ? "" : " Its board:\n" + players[currentPlayer].getGuessBoard());
             gameOver = checkForGameOver(players[currentPlayer]);
 
-            System.out.println(result);
+            consoleIO.printMessage(String.valueOf(result));
         }
         endGame(currentPlayer);
     }

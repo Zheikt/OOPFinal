@@ -5,13 +5,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
-public class AI extends Player {
+public class AI {
 
 
         boolean isRed;
 
         public AI(boolean isRed) {
-            super("",true);
             this.isRed = isRed;
         }
 

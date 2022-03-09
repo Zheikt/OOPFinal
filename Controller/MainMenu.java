@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class MainMenu{
-    private static ConsoleIO message = new ConsoleIO();
+    private ConsoleIO message = new ConsoleIO();
     BattleshipMenu bsMenu = new BattleshipMenu();
     private String Player1Name;
     private String Player2Name;
