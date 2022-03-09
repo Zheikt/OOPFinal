@@ -34,7 +34,8 @@ public class MainMenu{
     }
     public void menu1(){
         System.out.println("First things first. Can I get your name?");
-        setPlayer1Name(scanner.nextLine());
+        String name1 = scanner.nextLine();
+        setPlayer1Name(name1);
         System.out.println("Thank you.");
         System.out.println("////////////////////////////////////////////////////////////");
         System.out.println("Next thing on the Agenda. How would you like to play today? We have a couple options for ya: \n" +
@@ -46,7 +47,8 @@ public class MainMenu{
         switch (response){
             case 1:
                 System.out.println("What is gonna be the name of player 2?");
-                setPlayer2Name(scanner.nextLine());
+                String name2 = scanner.nextLine();
+                setPlayer2Name(name2);
                 System.out.println("Directing you to the game selection menu now...");
                 menu2();
             case 2:
