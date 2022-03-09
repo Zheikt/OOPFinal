@@ -9,7 +9,7 @@ public class CheckersMenu {
 
 
         public final int SIZE = 8;
-        private ConsoleIO message = new ConsoleIO();
+        private ConsoleIO consoleIO = new ConsoleIO();
 
         private Scanner input = new Scanner(System.in);
         boolean isPlayer1 = true;
@@ -43,11 +43,11 @@ public class CheckersMenu {
 
         boolean askIfTwoPlayer() {
             while (true) {
-                message.printMessage("Welcome to checkers!\n");
-                message.printMessage("Choose your mode!");
-                message.printMessage("1: Player VS Computer");
-                message.printMessage("2: Player VS Player");
-                message.printMessage("\nWhich one would you like to play? Enter a number or choose to exit: ");
+                consoleIO.printMessage("Welcome to checkers!\n");
+                consoleIO.printMessage("Choose your mode!");
+                consoleIO.printMessage("1: Player VS Computer");
+                consoleIO.printMessage("2: Player VS Player");
+                consoleIO.printMessage("\nWhich one would you like to play? Enter a number or choose to exit: ");
 
                 String response = input.nextLine();
                 switch (response.trim()) {
@@ -80,11 +80,11 @@ public class CheckersMenu {
                 }
 
                 if (movableWhiteNum + movableBlackNum == 0)
-                    message.printMessage("The game was a stalemate");
+                    consoleIO.printMessage("The game was a stalemate");
                 else if (movableWhiteNum == 0)
-                    message.printMessage("Congratulations, Black, you won!");
+                    consoleIO.printMessage("Congratulations, Black, you won!");
                 else if (movableBlackNum == 0)
-                    message.printMessage("Congratulations, Red, you won!");
+                    consoleIO.printMessage("Congratulations, Red, you won!");
                 else
                     return false;
             }
